@@ -1,4 +1,5 @@
 import './Section.css'
+
 export default function Section() {
     return (
         <section className="registrar-atividade-section">

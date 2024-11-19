@@ -1,4 +1,7 @@
-import './Footer.css'
+import '../../../../App.css';
+import playstore from './playstore.png'
+import apple from './appstore.png'
+
 export default function Footer() {
     return (
         <footer className="footer">
@@ -13,12 +16,12 @@ export default function Footer() {
             </div>
             <div className="store-icons">
                 <img
-                    src="imagens/playstore.png"
+                    src={playstore}
                     alt="Disponível na Play Store"
                     className="icone-store"
                 />
                 <img
-                    src="imagens/appstore.png"
+                    src={apple}
                     alt="Disponível na Apple Store"
                     className="icone-store"
                 />

@@ -1,15 +1,18 @@
-import './Header.css'
+import { Link } from 'react-router-dom';
+import '../../../../App.css';
+import logo from './novologo.png'
+
 export default function Header() {
 
     return (
         <header className="cabecalho">
             <div className="logo">
-                <img src="novologo.png" alt="Logo da Aplicação" />
+                <img src={logo} alt="Logo da Aplicação" />
             </div>
             <nav className="navegacao">
                 <ul>
                     <li>
-                        <a href="indexAtividades.php">Atividades</a>
+                        <Link to={'/atividades'}>Atividades</Link>
                     </li>
                     <li>
                         <a href="listagemBicicleta.php">Bicicletas</a>
