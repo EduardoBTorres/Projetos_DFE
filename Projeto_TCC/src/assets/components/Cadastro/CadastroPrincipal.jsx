@@ -2,11 +2,6 @@
 export default function CadastroPrincipal() {
     return (
         <div className="container">
-            <header className="cabecalho">
-                <div className="logo">
-                    
-                </div>
-            </header>
             <h1 className="titulo">FAZER CADASTRO</h1>
             <form
                 action="logica/logica_usuario.php"
@@ -41,15 +36,12 @@ export default function CadastroPrincipal() {
                     Imagem de Perfil:
                 </label>
                 <input type="file" id="imagem" name="imagem" className="input-file" />
+                <a href={'/bicicletas'}>
                 <button
                     type="submit"
-                    id="cadastrar"
-                    name="cadastrar"
-                    value="Cadastrar"
-                    className="botao-submit"
                 >
                     Cadastrar
-                </button>
+                </button></a>
             </form>
             <p className="login">
                 Já tem uma conta?{" "}

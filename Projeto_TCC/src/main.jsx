@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import App from './App.jsx'
 import Bicicletas from './Bicicletas.jsx'
-import CadastroPrincipal from './CadastroPrincipal.jsx'
+import CadastroPrincipal from './assets/components/Cadastro/CadastroPrincipal.jsx'
 
 
 const router = createBrowserRouter([
@@ -16,7 +16,7 @@ const router = createBrowserRouter([
     element: <Bicicletas />
   },
   {
-    path: '/',
+    path: '/cadastro',
     element: <CadastroPrincipal />
   }
 ]);
