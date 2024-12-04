@@ -1,55 +1,40 @@
-
-export default function CadastroPrincipal() {
+import {
+    Container,
+    Titulo,
+    FormCadastro,
+    Label,
+    Input,
+    BotaoSubmit,
+    ContainerPrincipal,
+  } from './CadastroPrincipal';
+  
+  export default function CadastroPrincipal() {
     return (
-        <div className="container">
-            <h1 className="titulo">FAZER CADASTRO</h1>
-            <form
-                action="logica/logica_usuario.php"
-                method="post"
-                encType="multipart/form-data"
-                className="form-cadastro"
-                onsubmit="validarFormulario()"
-            >
-                <label htmlFor="nome" className="label">
-                    Nome:
-                </label>
-                <input type="text" id="nome" name="nome" className="input" required="" />
-                <label htmlFor="email" className="label">
-                    Email:
-                </label>
-                <input type="email" id="email" name="email" className="input" required="" />
-                <label htmlFor="cpf" className="label">
-                    CPF:
-                </label>
-                <input type="text" id="cpf" name="cpf" className="input" required="" />
-                <label htmlFor="senha" className="label">
-                    Senha:
-                </label>
-                <input
-                    type="password"
-                    id="senha"
-                    name="senha"
-                    className="input"
-                    required=""
-                />
-                <label htmlFor="imagem" className="label">
-                    Imagem de Perfil:
-                </label>
-                <input type="file" id="imagem" name="imagem" className="input-file" />
-                <a href={'/bicicletas'}>
-                <button
-                    type="submit"
-                >
-                    Cadastrar
-                </button></a>
-            </form>
-            <p className="login">
-                Já tem uma conta?{" "}
-                <a href="index.php" className="botao-login">
-                    Faça login aqui
-                </a>
-            </p>
-        </div>
+      <ContainerPrincipal>
+      <Container>
+        <Titulo>FAZER CADASTRO</Titulo>
+        <FormCadastro method="post" encType="multipart/form-data">
+          <Label htmlFor="nome">Nome:</Label>
+          <Input type="text" id="nome" name="nome" required />
+  
+          <Label htmlFor="email">Email:</Label>
+          <Input type="email" id="email" name="email" required />
+  
+          <Label htmlFor="cpf">CPF:</Label>
+          <Input type="text" id="cpf" name="cpf" required />
+  
+          <Label htmlFor="senha">Senha:</Label>
+          <Input type="password" id="senha" name="senha" required />
+  
+          <Label htmlFor="imagem">Imagem de Perfil:</Label>
+          <Input type="file" id="imagem" name="imagem" className="file" />
+  
+          <a href="/bicicletas">
+            <BotaoSubmit type="submit">Cadastrar</BotaoSubmit>
+          </a>
+        </FormCadastro>
+      </Container>
+      </ContainerPrincipal>
     );
-}
-
+  }
+  
