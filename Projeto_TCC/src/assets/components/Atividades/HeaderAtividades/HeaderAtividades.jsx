@@ -1,44 +1,47 @@
-import '../Atividades.css'
+import {
+  Cabecalho,
+  Logo,
+  Navegacao,
+  Lista,
+  Item,
+  LinkNav,
+  BotaoSair,
+  UserInfo
+} from './HeaderAtividades.styles';
 import logo from '../../Bicicletas/Header/novologo.png';
 import { Link } from 'react-router-dom';
 
 export default function HeaderAtividades() {
   return (
-    <header className="cabecalho">
-      <div className="logo">
+    <Cabecalho>
+      <Logo>
         <img src={logo} alt="Logo da Aplicação" />
-      </div>
-      <nav className="navegacao">
-        <ul>
-          <li>
+      </Logo>
+      <Navegacao>
+        <Lista>
+          <Item>
             <a href="pag_inicial.php">Home</a>
-          </li>
-          <li>
-            <Link to={"/bicicletas"}>Bicicletas</Link>
-          </li>
-          <li>
+          </Item>
+          <Item>
+            <LinkNav to="/bicicletas">Bicicletas</LinkNav>
+          </Item>
+          <Item>
             <a href="rotas.php">Rotas</a>
-          </li>
-          <li>
+          </Item>
+          <Item>
             <a href="editarPerfil.php">Perfil</a>
-          </li>
-        </ul>
+          </Item>
+        </Lista>
         <form action="logica/logica_usuario.php" method="post">
-          <input
-            type="submit"
-            className="btn-sair"
-            name="sair"
-            defaultValue="Sair"
-          />
+          <BotaoSair type="submit" name="sair">
+            Sair
+          </BotaoSair>
         </form>
-        <div className="user-info">
-          <span>
-            Bem vindo
-          </span>
-        </div>
-      </nav>
-    </header>
+
+        <UserInfo>
+          <span>Bem-vindo</span>
+        </UserInfo>
+      </Navegacao>
+    </Cabecalho>
   );
 }
-
-

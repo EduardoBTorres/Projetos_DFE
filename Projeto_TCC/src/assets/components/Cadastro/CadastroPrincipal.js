@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const ContainerPrincipal = styled.div`
     background-image: url('../../../public/img/fundo_cadastro.jpg');
+    font-family: 'Poppins', sans-serif;
 `;
 export const Container = styled.div`
   background-color: rgba(0, 0, 0, 0.8);
