@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  GlobalStyle,
   BannerContainer,
   Banner,
   BannerText,
@@ -26,6 +27,7 @@ import ciclista1 from "../../Atividades/fundo_login.jpg";
 export default function MainAtividades({ atividades }) {
   return (
     <>
+      <GlobalStyle /> {/* Reset de estilos globais */}
       <BannerContainer>
         <Banner src={ciclista1} alt="Banner" />
         <BannerText>

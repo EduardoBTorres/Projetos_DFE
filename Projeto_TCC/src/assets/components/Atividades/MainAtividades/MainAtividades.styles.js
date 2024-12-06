@@ -1,4 +1,22 @@
-import styled from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
+
+/* Reset global de estilos */
+export const GlobalStyle = createGlobalStyle`
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+  }
+
+  a {
+    text-decoration: none;
+  }
+`;
 
 export const BannerContainer = styled.div`
   position: relative;
@@ -36,6 +54,7 @@ export const Container = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   text-align: center;
+  width: 100%; /* Ocupa toda a largura */
 `;
 
 export const Titulo = styled.h1`

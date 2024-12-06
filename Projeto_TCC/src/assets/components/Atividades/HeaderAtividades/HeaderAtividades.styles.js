@@ -11,11 +11,12 @@ export const Cabecalho = styled.header`
   top: 0;
   z-index: 1000;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  height: 8em;
 `;
 
 export const Logo = styled.div`
   img {
-    height: 100px;
+    height: 7em;
   }
 `;
 
@@ -32,7 +33,7 @@ export const Lista = styled.ul`
 
 export const Item = styled.li`
   margin: 0 1em;
-  font-size: 1.2em;
+  font-size: 1em;
 `;
 
 export const LinkNav = styled(Link)`
