@@ -2,13 +2,12 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 export const Cabecalho = styled.header`
-  background-color: #1a1a1a;
+  background-color: #000;
   color: #fff;
   padding: 1em 2em;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: sticky;
   top: 0;
   z-index: 1000;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);

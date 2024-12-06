@@ -1,24 +1,20 @@
-import '../Atividades.css'
+import React from 'react';
+import {   Footer, LinksFooter, LinkFooter, StoreIcons, IconeStore, Copyright } from './FooterAtividades.styles';
 import apple from '../../Bicicletas/Footer/appstore.png';
 import playstore from '../../Bicicletas/Footer/playstore.png';
 
 export default function FooterAtividades() {
     return (
-        <footer className="footer">
-            <div className="links-footer">
-                <a href="#" className="link-footer">
-                    Sobre Nós
-                </a>
-                <a href="#" className="link-footer">
-                    Contato
-                </a>
-            </div>
-            <div className="store-icons">
-                <img src={apple} alt="Play Store" className="icone-store" />
-                <img src={playstore} alt="Apple Store" className="icone-store" />
-            </div>
-            <p className="copyright">© 2024 BikeTracker. Todos os direitos reservados.</p>
-        </footer>
+            <Footer>
+                <LinksFooter>
+                    <LinkFooter href="#">Sobre Nós</LinkFooter>
+                    <LinkFooter href="#">Contato</LinkFooter>
+                </LinksFooter>
+                <StoreIcons>
+                    <IconeStore src={apple} alt="App Store" />
+                    <IconeStore src={playstore} alt="Play Store" />
+                </StoreIcons>
+                <Copyright>© 2024 BikeTracker. Todos os direitos reservados.</Copyright>
+            </Footer>
     );
 }
-

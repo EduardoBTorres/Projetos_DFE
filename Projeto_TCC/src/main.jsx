@@ -16,7 +16,7 @@ const router = createBrowserRouter([
     element: <Bicicletas />
   },
   {
-    path: '/cadastro',
+    path: '/',
     element: <CadastroPrincipal />
   }
 ]);

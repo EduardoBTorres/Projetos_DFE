@@ -1,41 +1,46 @@
-import { Link } from 'react-router-dom';
-import '../../../../App.css';
-import logo from './novologo.png'
+// Header.jsx
+import React from "react";
+import { Link } from "react-router-dom";
+import logo from "./novologo.png";
+import {
+  HeaderContainer,
+  Logo,
+  Navigation,
+  NavList,
+  NavItem,
+  NavLink,
+  UserInfo,
+  LogoutButton,
+} from "./HeaderStyles";
 
 export default function Header() {
-
-    return (
-        <header className="cabecalho">
-            <div className="logo">
-                <img src={logo} alt="Logo da Aplicação" />
-            </div>
-            <nav className="navegacao">
-                <ul>
-                    <li>
-                        <Link to={'/atividades'}>Atividades</Link>
-                    </li>
-                    <li>
-                        <a href="listagemBicicleta.php">Bicicletas</a>
-                    </li>
-                    <li>
-                        <a href="rotas.php">Rotas</a>
-                    </li>
-                    <li>
-                        <a href="editarPerfil.php">Perfil</a>
-                    </li>
-                </ul>
-                <form action="logica/logica_usuario.php" method="post">
-                    <input
-                        type="submit"
-                        className="btn-sair"
-                        name="sair"
-                        defaultValue="Sair"
-                    />
-                </form>
-                <div className="user-info">
-                    <span>Bem vindo</span>
-                </div>
-            </nav>
-        </header>
-    );
+  return (
+    <HeaderContainer>
+      <Logo>
+        <img src={logo} alt="Logo da Aplicação" />
+      </Logo>
+      <Navigation>
+        <NavList>
+          <NavItem>
+            <Link to="/atividades">Atividades</Link>
+          </NavItem>
+          <NavItem>
+            <NavLink href="listagemBicicleta.php">Bicicletas</NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink href="rotas.php">Rotas</NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink href="editarPerfil.php">Perfil</NavLink>
+          </NavItem>
+        </NavList>
+        <form action="logica/logica_usuario.php" method="post">
+          <LogoutButton type="submit" name="sair" value="Sair" />
+        </form>
+        <UserInfo>
+          <span>Bem-vindo</span>
+        </UserInfo>
+      </Navigation>
+    </HeaderContainer>
+  );
 }

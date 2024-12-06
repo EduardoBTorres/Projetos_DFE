@@ -3,7 +3,7 @@ import MainAtividades from './assets/components/Atividades/MainAtividades/MainAt
 import FooterAtividades from './assets/components/Atividades/FooterAtividades/FooterAtividades'
 
 import { useState } from 'react';
-import './App.css';
+
 
 export default function App() {
   const [atividades, setAtividades] = useState([

@@ -1,34 +1,35 @@
-import '../../../../App.css';
-import playstore from './playstore.png'
-import apple from './appstore.png'
+import React from "react";
+import playstore from "./playstore.png";
+import apple from "./appstore.png";
+import { 
+    FooterContainer, 
+    LinksFooter, 
+    LinkFooter, 
+    StoreIcons, 
+    IconeStore, 
+    Copyright 
+} from "./FooterStyles";
 
 export default function Footer() {
     return (
-        <footer className="footer">
-            <div className="links-footer">
-                <a href="sobre_nos.php" className="link-footer">
-                    Sobre Nós
-                </a>{" "}
-                |
-                <a href="contatos.php" className="link-footer">
-                    Contatos
-                </a>
-            </div>
-            <div className="store-icons">
-                <img
+        <FooterContainer>
+            <LinksFooter>
+                <LinkFooter href="sobre_nos.php">Sobre Nós</LinkFooter> |
+                <LinkFooter href="contatos.php">Contatos</LinkFooter>
+            </LinksFooter>
+            <StoreIcons>
+                <IconeStore
                     src={playstore}
                     alt="Disponível na Play Store"
-                    className="icone-store"
                 />
-                <img
+                <IconeStore
                     src={apple}
                     alt="Disponível na Apple Store"
-                    className="icone-store"
                 />
-            </div>
-            <div className="copyright">
+            </StoreIcons>
+            <Copyright>
                 <p>© 2024 BikeTracker. Todos os direitos reservados.</p>
-            </div>
-        </footer>
+            </Copyright>
+        </FooterContainer>
     );
 }
