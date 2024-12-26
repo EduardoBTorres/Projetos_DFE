@@ -1,7 +1,7 @@
-import Header from './assets/components/Bicicletas/Header/Header'
-import Main from './assets/components/Bicicletas/Main/Main'
-import Section from './assets/components/Bicicletas/Section/Section'
-import Footer from './assets/components/Bicicletas/Footer/Footer'
+import Header from './components/Bicicletas/Header/Header'
+import Main from './components/Bicicletas/Main/Main'
+import Section from './components/Bicicletas/Section/Section'
+import Footer from './components/Bicicletas/Footer/Footer'
 import { useState } from 'react';
 
 export default function Bicicletas() {

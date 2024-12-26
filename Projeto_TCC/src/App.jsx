@@ -1,6 +1,6 @@
-import HeaderAtividades from './assets/components/Atividades/HeaderAtividades/HeaderAtividades'
-import MainAtividades from './assets/components/Atividades/MainAtividades/MainAtividades'
-import FooterAtividades from './assets/components/Atividades/FooterAtividades/FooterAtividades'
+import HeaderAtividades from './components/Atividades/HeaderAtividades/HeaderAtividades'
+import MainAtividades from './components/Atividades/MainAtividades/MainAtividades'
+import FooterAtividades from './components/Atividades/FooterAtividades/FooterAtividades'
 
 import { useState } from 'react';
 
