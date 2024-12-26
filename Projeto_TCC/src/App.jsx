@@ -1,6 +1,6 @@
 import HeaderAtividades from './components/Atividades/HeaderAtividades/HeaderAtividades'
 import MainAtividades from './components/Atividades/MainAtividades/MainAtividades'
-import FooterAtividades from './components/Atividades/FooterAtividades/FooterAtividades'
+import FooterAtividades from './components/Footer/Footer'
 
 import { useState } from 'react';
 

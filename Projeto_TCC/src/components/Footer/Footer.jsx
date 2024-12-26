@@ -14,8 +14,8 @@ export default function Footer() {
     return (
         <FooterContainer>
             <LinksFooter>
-                <LinkFooter href="sobre_nos.php">Sobre Nós</LinkFooter> |
-                <LinkFooter href="contatos.php">Contatos</LinkFooter>
+                <LinkFooter href="#">Sobre Nós</LinkFooter> |
+                <LinkFooter href="#">Contatos</LinkFooter>
             </LinksFooter>
             <StoreIcons>
                 <IconeStore
