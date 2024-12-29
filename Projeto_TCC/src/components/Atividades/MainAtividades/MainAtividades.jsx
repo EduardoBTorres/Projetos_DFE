@@ -64,7 +64,7 @@ export default function MainAtividades({ atividades }) {
               {atividades.map((atividade, index) => (
                 <GridItem key={index}>
                   <p>Título: {atividade.titulo}</p>
-                  <p>Distância: {atividade.distancia}</p>
+                  <p>Distância: {atividade.distancia} km</p>
                   <p>Data: {atividade.data}</p>
                   <p>Descrição: {atividade.descricao}</p>
                 </GridItem>

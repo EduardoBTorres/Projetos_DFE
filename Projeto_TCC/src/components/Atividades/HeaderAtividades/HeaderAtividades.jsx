@@ -1,15 +1,5 @@
-import {
-  Cabecalho,
-  Logo,
-  Navegacao,
-  Lista,
-  Item,
-  LinkNav,
-  BotaoSair,
-  UserInfo
-} from './HeaderAtividades.styles';
+import { Cabecalho, Logo, Navegacao, Lista, Item, LinkNav, BotaoSair, UserInfo } from './HeaderAtividades.styles';
 import logo from '../../Bicicletas/Header/novologo.png';
-import { Link } from 'react-router-dom';
 
 export default function HeaderAtividades() {
   return (
@@ -20,27 +10,22 @@ export default function HeaderAtividades() {
       <Navegacao>
         <Lista>
           <Item>
-            <a href="pag_inicial.php">Home</a>
+            <LinkNav to="/">Home</LinkNav>
           </Item>
           <Item>
             <LinkNav to="/bicicletas">Bicicletas</LinkNav>
           </Item>
           <Item>
-            <a href="rotas.php">Rotas</a>
+            <LinkNav to="/rotas">Rotas</LinkNav>
           </Item>
           <Item>
-            <a href="editarPerfil.php">Perfil</a>
+            <LinkNav to="/perfil">Perfil</LinkNav>
           </Item>
         </Lista>
-        <form action="logica/logica_usuario.php" method="post">
-          <BotaoSair type="submit" name="sair">
-            Sair
-          </BotaoSair>
+        <form method="post">
+          <BotaoSair type="submit" name="sair">Sair</BotaoSair>
         </form>
-
-        <UserInfo>
-          <span>Bem-vindo</span>
-        </UserInfo>
+        <UserInfo><span>Bem-vindo</span></UserInfo>
       </Navegacao>
     </Cabecalho>
   );
