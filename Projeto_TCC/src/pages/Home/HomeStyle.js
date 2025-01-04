@@ -1,5 +1,10 @@
 import styled from 'styled-components';
 
+export const StyleGeral = styled.div`
+  font-family: 'Poppins', sans-serif;
+  background-color: #fff;
+`;
+
 export const BannerContainer = styled.div`
   position: relative;
   width: 100%;
@@ -9,6 +14,7 @@ export const BannerContainer = styled.div`
 `;
 
 export const Banner = styled.img`
+  background-image: url('../../../public/img/telainicial.jpg');
   width: 100%;
   height: 45em;
   object-fit: cover;
@@ -75,30 +81,4 @@ export const TextoSecundario = styled.p`
   margin-bottom: 2.5em;
   font-size: 1.125em;
   line-height: 1.5;
-`;
-
-export const ToggleButton = styled.button`
-  background-color: #b2ff59;
-  color: #000;
-  font-weight: bold;
-  border: none;
-  border-radius: 1em;
-  padding: 0.625em 1.25em;
-  font-size: 1em;
-  cursor: pointer;
-`;
-
-export const AsideInformacoes = styled.aside`
-  background-color: #b2ff59;
-  padding: 1.25em;
-  border-radius: 0.3125em;
-  text-align: justify;
-  max-width: 50%;
-`;
-
-export const AsideTitle = styled.h2`
-  font-size: 1.5em;
-  margin-bottom: 0.625em;
-  margin-top: 3em;
-  color: #000;
 `;

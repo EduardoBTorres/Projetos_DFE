@@ -14,7 +14,6 @@ import { useAuthContext } from "../contexts/AuthProvider"; // Para verificar o e
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
-      {/* Rota pública - login, cadastro */}
       <Route path="/" element={<Login />} />
       <Route path="/cadastro" element={<Cadastro />} />
 

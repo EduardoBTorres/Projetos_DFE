@@ -19,7 +19,7 @@ export default function HeaderAtividades() {
       <Navegacao>
         <Lista>
           <Item>
-            <LinkNav to="/">Home</LinkNav>
+            <LinkNav to="/home">Home</LinkNav>
           </Item>
           <Item>
             <LinkNav to="/bicicletas">Bicicletas</LinkNav>
@@ -31,14 +31,16 @@ export default function HeaderAtividades() {
             <LinkNav to="/perfil">Perfil</LinkNav>
           </Item>
         </Lista>
-        <form method="post">
-          <BotaoSair type="submit" name="sair">
-            Sair
-          </BotaoSair>
-        </form>
         <UserInfo>
           <span>Bem-vindo</span>
         </UserInfo>
+        <form method="post">
+          <LinkNav to="/">
+            <BotaoSair type="submit" name="sair">
+              Sair
+            </BotaoSair>
+          </LinkNav>
+        </form>
       </Navegacao>
     </Cabecalho>
   );

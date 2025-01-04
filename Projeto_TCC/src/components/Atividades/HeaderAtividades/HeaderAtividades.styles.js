@@ -2,16 +2,19 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 export const Cabecalho = styled.header`
+  font-family: 'Poppins', sans-serif;
   background-color: #000;
   color: #fff;
   padding: 1em 2em;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: fixed; 
   top: 0;
-  z-index: 1000;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  left: 0; 
+  width: 100%; 
   height: 8em;
+  z-index: 1000;
 `;
 
 export const Logo = styled.div`
@@ -28,7 +31,9 @@ export const Navegacao = styled.nav`
 export const Lista = styled.ul`
   list-style: none;
   display: flex;
-  margin-right: 40em;
+  align-items: center;
+  gap: 1em;
+  margin-right: 50em;
 `;
 
 export const Item = styled.li`
@@ -51,6 +56,7 @@ export const BotaoSair = styled.button`
   background-color: #b2ff59;
   color: #1a1a1a;
   font-weight: bold;
+  margin-right: 4em;
   border: none;
   border-radius: 25px;
   padding: 0.5em 1.5em;
@@ -59,13 +65,12 @@ export const BotaoSair = styled.button`
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: #9dff57;
+    background-color:rgb(103, 204, 31);
   }
 `;
 
-
 export const UserInfo = styled.div`
-  margin-left: 1em;
+  padding: 0.5em 1em;
   font-weight: 500;
   color: #fff;
 `;
