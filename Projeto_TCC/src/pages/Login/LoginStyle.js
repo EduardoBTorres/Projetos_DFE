@@ -1,6 +1,18 @@
 import styled from 'styled-components';
 
+export const ImagemFundo = styled.div`
+  background-image: url('../../../public/img/fundo_cadastro.jpg');
+  background-size: cover;
+  background-position: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+`;
 export const Container = styled.div`
+  font-family: 'Poppins', sans-serif;
   background-color: rgba(0, 0, 0, 0.7);
   border: 0.2em solid #b2ff59;
   border-radius: 1em;
@@ -9,7 +21,9 @@ export const Container = styled.div`
   width: 90%;
   max-width: 30em;
   text-align: center;
-  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5em;
 `;
 
 export const Header = styled.header`

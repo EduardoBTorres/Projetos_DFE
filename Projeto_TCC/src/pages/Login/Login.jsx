@@ -2,7 +2,9 @@ import React, { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../contexts/AuthProvider";
 import axiosClient from "../../utils/axios_client";
+import logo from "../../components/Bicicletas/Header/novologo.png";
 import {
+  ImagemFundo,
   Container,
   Header,
   Logo,
@@ -14,7 +16,7 @@ import {
   CadastroText,
   CadastroLink,
   ErrorMessage,
-} from './LoginStyle';
+} from "./LoginStyle";
 
 export default function Login() {
   // Contextos e navegação
@@ -46,7 +48,7 @@ export default function Login() {
       // Atualiza o contexto e o localStorage
       setToken(data.token);
       setUser(data.user);
-      localStorage.setItem('CURRENT_USER', JSON.stringify(data.user));
+      localStorage.setItem("CURRENT_USER", JSON.stringify(data.user));
 
       // Alerta de sucesso
       alert("Usuário logado!");
@@ -57,7 +59,7 @@ export default function Login() {
       console.error("Erro ao fazer login:", error);
 
       // Exibe a mensagem de erro no componente
-      const errorMessage = document.getElementById('mensagemErro');
+      const errorMessage = document.getElementById("mensagemErro");
       errorMessage.textContent = "Credenciais inválidas. Tente novamente!";
       errorMessage.style.display = "block"; // Mostra a mensagem
     }
@@ -65,25 +67,27 @@ export default function Login() {
 
   // Estrutura visual mantida
   return (
-    <Container>
-      <Header>
-        <Logo src="imagens/novologo.png" alt="Logo da Aplicação" />
-      </Header>
-      <Title>FAZER LOGIN</Title>
-      <ErrorMessage id="mensagemErro" style={{ display: "none" }} />
-      <Form method="post" onSubmit={onSubmit}>
-        <Label htmlFor="email">Email:</Label>
-        <Input type="email" id="email" ref={emailRef} required />
+    <ImagemFundo>
+      <Container>
+        <Header>
+          <Logo src={logo} alt="Logo da Aplicação" />
+        </Header>
+        <Title>FAZER LOGIN</Title>
+        <ErrorMessage id="mensagemErro" style={{ display: "none" }} />
+        <Form method="post" onSubmit={onSubmit}>
+          <Label htmlFor="email">Email:</Label>
+          <Input type="email" id="email" ref={emailRef} required />
 
-        <Label htmlFor="senha">Senha:</Label>
-        <Input type="password" id="senha" ref={passwordRef} required />
+          <Label htmlFor="senha">Senha:</Label>
+          <Input type="password" id="senha" ref={passwordRef} required />
 
-        <SubmitButton type="submit">Entrar</SubmitButton>
-      </Form>
-      <CadastroText>
-        Não tem uma conta?{' '}
-        <CadastroLink href="/cadastro">Cadastre-se aqui</CadastroLink>
-      </CadastroText>
-    </Container>
+          <SubmitButton type="submit">Entrar</SubmitButton>
+        </Form>
+        <CadastroText>
+          Não tem uma conta?{" "}
+          <CadastroLink href="/cadastro">Cadastre-se aqui</CadastroLink>
+        </CadastroText>
+      </Container>
+    </ImagemFundo>
   );
 }

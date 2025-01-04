@@ -1,5 +1,14 @@
-import { Cabecalho, Logo, Navegacao, Lista, Item, LinkNav, BotaoSair, UserInfo } from './HeaderAtividades.styles';
-import logo from '../../Bicicletas/Header/novologo.png';
+import {
+  Cabecalho,
+  Logo,
+  Navegacao,
+  Lista,
+  Item,
+  LinkNav,
+  BotaoSair,
+  UserInfo,
+} from "./HeaderAtividades.styles";
+import logo from "../../Bicicletas/Header/novologo.png";
 
 export default function HeaderAtividades() {
   return (
@@ -23,9 +32,13 @@ export default function HeaderAtividades() {
           </Item>
         </Lista>
         <form method="post">
-          <BotaoSair type="submit" name="sair">Sair</BotaoSair>
+          <BotaoSair type="submit" name="sair">
+            Sair
+          </BotaoSair>
         </form>
-        <UserInfo><span>Bem-vindo</span></UserInfo>
+        <UserInfo>
+          <span>Bem-vindo</span>
+        </UserInfo>
       </Navegacao>
     </Cabecalho>
   );

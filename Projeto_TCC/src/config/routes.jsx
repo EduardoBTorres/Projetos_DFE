@@ -18,7 +18,6 @@ const router = createBrowserRouter(
       <Route path="/" element={<Login />} />
       <Route path="/cadastro" element={<Cadastro />} />
 
-      {/* Rota de logout */}
       <Route path="/logout" element={<Logout />} />
       <Route path="/home" element={<Home />} />
       <Route path="/atividades" element={<AtividadesIndex />} />

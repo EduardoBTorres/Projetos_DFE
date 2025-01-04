@@ -1,16 +1,20 @@
 import {
+  ImagemFundo,
   Container,
   Titulo,
   FormCadastro,
   Label,
   Input,
   BotaoSubmit,
-  ContainerPrincipal,
+  Logo,
+  CadastroLink,
+  CadastroText,
 } from "./CadastroPrincipal";
 
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axiosClient from "../../utils/axios_client";
+import logo from "../../components/Bicicletas/Header/novologo.png";
 
 export default function CadastroPrincipal() {
   const [disableButton, setDisableButton] = useState(true);
@@ -47,13 +51,9 @@ export default function CadastroPrincipal() {
 
   const handleEnableButton = () => {
     const isValidCpf = cpfPattern.test(cpf);
-    setDisableButton(!(
-      name &&
-      email &&
-      !emailInvalid &&
-      password &&
-      isValidCpf
-    ));
+    setDisableButton(
+      !(name && email && !emailInvalid && password && isValidCpf)
+    );
   };
 
   const onSubmit = async (event) => {
@@ -64,7 +64,7 @@ export default function CadastroPrincipal() {
         name,
         email,
         password,
-        cpf
+        cpf,
       };
 
       const response = await axiosClient.post("/users", payload);
@@ -79,19 +79,41 @@ export default function CadastroPrincipal() {
   };
 
   return (
-    <ContainerPrincipal>
+    <ImagemFundo>
       <Container>
+        <Logo src={logo} alt="Logo" />
         <Titulo>FAZER CADASTRO</Titulo>
         <FormCadastro method="post" onSubmit={onSubmit}>
           <Label htmlFor="nome">Nome:</Label>
-          <Input type="text" id="nome" name="nome" value={name} onChange={handleName} required />
+          <Input
+            type="text"
+            id="nome"
+            name="nome"
+            value={name}
+            onChange={handleName}
+            required
+          />
 
           <Label htmlFor="email">Email:</Label>
-          <Input type="email" id="email" name="email" value={email} onChange={handleEmail} required />
+          <Input
+            type="email"
+            id="email"
+            name="email"
+            value={email}
+            onChange={handleEmail}
+            required
+          />
           {emailInvalid && <span style={{ color: "red" }}>Email inválido</span>}
 
           <Label htmlFor="cpf">CPF:</Label>
-          <Input type="text" id="cpf" name="cpf" value={cpf} onChange={handleCpf} required />
+          <Input
+            type="text"
+            id="cpf"
+            name="cpf"
+            value={cpf}
+            onChange={handleCpf}
+            required
+          />
 
           <Label htmlFor="senha">Senha:</Label>
           <Input
@@ -102,9 +124,15 @@ export default function CadastroPrincipal() {
             required
           />
 
-          <BotaoSubmit type="submit" disabled={disableButton}>Cadastrar</BotaoSubmit>
+          <BotaoSubmit type="submit" disabled={disableButton}>
+            Cadastrar
+          </BotaoSubmit>
         </FormCadastro>
+        <CadastroText>
+          Já possui uma conta?{" "}
+          <CadastroLink href="/">Faça login aqui</CadastroLink>
+        </CadastroText>
       </Container>
-    </ContainerPrincipal>
+    </ImagemFundo>
   );
 }

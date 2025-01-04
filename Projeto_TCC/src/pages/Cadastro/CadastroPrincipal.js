@@ -1,10 +1,23 @@
 import styled from 'styled-components';
 
-export const ContainerPrincipal = styled.div`
-    background-image: url('../../../public/img/fundo_cadastro.jpg');
-    font-family: 'Poppins', sans-serif;
+export const ImagemFundo = styled.div`
+  background-image: url('../../../public/img/fundo_cadastro.jpg');
+  background-size: cover;
+  background-position: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
 `;
+
+export const Logo = styled.img`
+  width: 10em;
+`;
+
 export const Container = styled.div`
+  font-family: 'Poppins', sans-serif;
   background-color: rgba(0, 0, 0, 0.8);
   border: 0.2em solid #b2ff59;
   border-radius: 1em;
@@ -15,6 +28,7 @@ export const Container = styled.div`
   text-align: center;
   margin-left: auto;
   margin-right: auto;   
+  margin-top: 5em;
 `;
 
 export const Titulo = styled.h1`
@@ -46,6 +60,21 @@ export const Input = styled.input`
 
   &.file {
     background-color: transparent;
+  }
+`;
+
+export const CadastroText = styled.p`
+  margin-top: 1.5em;
+  color: #a4d3a1;
+`;
+
+export const CadastroLink = styled.a`
+  color: #b2ff59;
+  text-decoration: none;
+  font-weight: bold;
+
+  &:hover {
+    text-decoration: underline;
   }
 `;
 

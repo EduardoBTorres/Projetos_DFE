@@ -6,10 +6,7 @@ import Footer from '../../../components/Footer/Footer';
 export default function BicicletasIndex() {
     return (
         <>
-            <Header />
-            <Main />
-            <Section />
-            <Footer />
+            <h1>ola</h1>
         </>
     );
 }

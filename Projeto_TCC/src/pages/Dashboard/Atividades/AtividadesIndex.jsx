@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import HeaderAtividades from "../../../components/Atividades/HeaderAtividades/HeaderAtividades";
 import MainAtividades from "../../../components/Atividades/MainAtividades/MainAtividades";
-import Footer from "../../../components/Footer/Footer"; // Importando o Footer corretamente
+import Footer from "../../../components/Footer/Footer";
 
 export default function AtividadesIndex() {
   const [atividades, setAtividades] = useState([]);
