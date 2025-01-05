@@ -58,14 +58,12 @@ export default function Login() {
     } catch (error) {
       console.error("Erro ao fazer login:", error);
 
-      // Exibe a mensagem de erro no componente
       const errorMessage = document.getElementById("mensagemErro");
       errorMessage.textContent = "Credenciais inválidas. Tente novamente!";
-      errorMessage.style.display = "block"; // Mostra a mensagem
+      errorMessage.style.display = "block"; 
     }
   };
 
-  // Estrutura visual mantida
   return (
     <ImagemFundo>
       <Container>
