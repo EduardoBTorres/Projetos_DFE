@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosClient = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
+  baseURL: 'http://localhost:8000/api',
 });
 
 // Interceptor para adicionar o token de autorização e tratar a resposta

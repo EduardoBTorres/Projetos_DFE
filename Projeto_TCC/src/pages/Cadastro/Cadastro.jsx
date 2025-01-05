@@ -58,31 +58,43 @@ export default function CadastroPrincipal() {
 
   const onSubmit = async (event) => {
     event.preventDefault();
-
+  
+    const payload = {
+      name,
+      email,
+      password,
+      cpf,
+    };
+  
     try {
-      const payload = {
-        name,
-        email,
-        password,
-        cpf,
-      };
-
       const response = await axiosClient.post("/users", payload);
-      if (response?.status !== 201) throw new Error(response.data);
-
-      alert("Usuário criado com sucesso!");
-      navigate("/login");
+      if (response.status === 201) {
+        alert("Usuário criado com sucesso!");
+        navigate("/home");
+      }
     } catch (error) {
       console.error(error);
-      alert("Erro ao criar usuário. Tente novamente.");
+  
+      // Tratamento de erros específicos
+      if (error.response && error.response.status === 422) {
+        const errors = error.response.data;
+        let errorMessage = "Erro ao criar usuário:\n";
+        Object.keys(errors).forEach((key) => {
+          errorMessage += `${key}: ${errors[key].join(", ")}\n`;
+        });
+        alert(errorMessage);
+      } else {
+        alert("Erro ao criar usuário. Tente novamente.");
+      }
     }
   };
+  
 
   return (
     <ImagemFundo>
       <Container>
         <Logo src={logo} alt="Logo" />
-        <Titulo>FAZER CADASTRO</Titulo>
+        <Titulo>CADASTRE-SE</Titulo>
         <FormCadastro method="post" onSubmit={onSubmit}>
           <Label htmlFor="nome">Nome:</Label>
           <Input
@@ -124,7 +136,7 @@ export default function CadastroPrincipal() {
             required
           />
 
-          <BotaoSubmit type="submit" disabled={disableButton}>
+          <BotaoSubmit type="submit">
             Cadastrar
           </BotaoSubmit>
         </FormCadastro>

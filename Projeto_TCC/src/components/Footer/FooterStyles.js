@@ -6,7 +6,6 @@ export const FooterContainer = styled.footer`
     color: #fff;
     padding: 1.25em;
     text-align: center;
-    width: 100%;
 `;
 
 export const LinksFooter = styled.div`

@@ -72,7 +72,7 @@ export default function Login() {
         <Header>
           <Logo src={logo} alt="Logo da Aplicação" />
         </Header>
-        <Title>FAZER LOGIN</Title>
+        <Title>ENTRAR</Title>
         <ErrorMessage id="mensagemErro" style={{ display: "none" }} />
         <Form method="post" onSubmit={onSubmit}>
           <Label htmlFor="email">Email:</Label>

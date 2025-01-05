@@ -18,17 +18,18 @@ export const Logo = styled.img`
 
 export const Container = styled.div`
   font-family: 'Poppins', sans-serif;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.7);
   border: 0.2em solid #b2ff59;
   border-radius: 1em;
   padding: 2em;
-  box-shadow: 0 0.4em 0.8em rgba(0, 0, 0, 0.1);
-  max-width: 40em;
+  box-shadow: 0 0.4em 0.8em rgba(0, 0, 0, 0.5);
+  max-width: 30em;
   width: 100%;
   text-align: center;
   margin-left: auto;
   margin-right: auto;   
-  margin-top: 5em;
+  margin-top: 4em;
+  
 `;
 
 export const Titulo = styled.h1`
@@ -45,13 +46,13 @@ export const FormCadastro = styled.form`
 
 export const Label = styled.label`
   margin-bottom: 0.5em;
-  color: #a4d3a1;
+  color: #b2ff59;
   text-align: left;
 `;
 
 export const Input = styled.input`
   padding: 0.8em;
-  border: 0.1em solid #6fa96d;
+  border: 0.1em solid #b2ff59;
   border-radius: 0.5em;
   margin-bottom: 1em;
   font-size: 1em;
