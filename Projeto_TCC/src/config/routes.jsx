@@ -3,24 +3,55 @@ import {
   createRoutesFromElements,
   Route,
 } from "react-router-dom";
+
 import BicicletasIndex from "../pages/Dashboard/Bicicletas/BicicletasIndex.jsx";
 import Cadastro from "../pages/Cadastro/Cadastro.jsx";
 import Login from "../pages/Login/Login.jsx";
 import Home from "../pages/Home/Home.jsx";
-import Logout from "../pages/Logout/Logout.jsx";
 import AtividadesIndex from "../pages/Dashboard/Atividades/AtividadesIndex.jsx";
-import { useAuthContext } from "../contexts/AuthProvider"; // Para verificar o estado de autenticação
+import ProtectedRoute from "../components/ProtectedRoute/ProtectedRoute.jsx";
+import EditUser from "../pages/Dashboard/Users/EditUser.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
+      {/* Rotas públicas */}
       <Route path="/" element={<Login />} />
       <Route path="/cadastro" element={<Cadastro />} />
 
-      <Route path="/logout" element={<Logout />} />
-      <Route path="/home" element={<Home />} />
-      <Route path="/atividades" element={<AtividadesIndex />} />
-      <Route path="/bicicletas" element={<BicicletasIndex />} />
+      {/* Rotas protegidas */}
+      <Route
+        path="/home"
+        element={
+          <ProtectedRoute>
+            <Home />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/atividades"
+        element={
+          <ProtectedRoute>
+            <AtividadesIndex />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/bicicletas"
+        element={
+          <ProtectedRoute>
+            <BicicletasIndex />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/editar-perfil"
+        element={
+          <ProtectedRoute>
+            <EditUser />
+          </ProtectedRoute>
+        }
+      />
     </>
   )
 );

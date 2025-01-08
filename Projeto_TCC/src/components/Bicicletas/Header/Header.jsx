@@ -1,4 +1,3 @@
-// Header.jsx
 import React from "react";
 import { Link } from "react-router-dom";
 import logo from "./novologo.png";
@@ -14,6 +13,8 @@ import {
 } from "./HeaderStyles";
 
 export default function Header() {
+
+  
   return (
     <HeaderContainer>
       <Logo>
@@ -22,16 +23,16 @@ export default function Header() {
       <Navigation>
         <NavList>
           <NavItem>
+            <Link to="/home">Home</Link>
+          </NavItem>
+          <NavItem>
             <Link to="/atividades">Atividades</Link>
           </NavItem>
           <NavItem>
-            <NavLink href="listagemBicicleta.php">Bicicletas</NavLink>
+            <Link to="/home">Home</Link>
           </NavItem>
           <NavItem>
-            <NavLink href="rotas.php">Rotas</NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink href="editarPerfil.php">Perfil</NavLink>
+            <Link to="/editar-perfil">Perfil</Link>
           </NavItem>
         </NavList>
         <form action="logica/logica_usuario.php" method="post">

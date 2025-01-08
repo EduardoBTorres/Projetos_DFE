@@ -1,4 +1,3 @@
-// FooterStyles.js
 import styled from "styled-components";
 
 export const FooterContainer = styled.footer`
@@ -6,6 +5,10 @@ export const FooterContainer = styled.footer`
     color: #fff;
     padding: 1.25em;
     text-align: center;
+    width: 100%;
+    position: fixed; /* Mantém o rodapé fixo */
+    bottom: 0; /* Alinha no final */
+    left: 0;
 `;
 
 export const LinksFooter = styled.div`
@@ -50,60 +53,5 @@ export const IconeStore = styled.img`
 export const Copyright = styled.div`
     p {
         margin: 0;
-    }
-`;
-
-// Responsividade
-export const GlobalStyle = styled.div`
-    @media (max-width: 1024px) {
-        ${LinksFooter} {
-            gap: 0.75em;
-        }
-
-        ${LinkFooter} {
-            font-size: 0.9em;
-        }
-
-        ${StoreIcons} {
-            gap: 0.5em;
-        }
-    }
-
-    @media (max-width: 768px) {
-        ${FooterContainer} {
-            padding: 1em;
-        }
-
-        ${LinksFooter} {
-            flex-direction: column;
-            align-items: center;
-            gap: 0.5em;
-        }
-
-        ${StoreIcons} {
-            gap: 0.4em;
-        }
-
-        ${IconeStore} {
-            height: 1.5em;
-        }
-    }
-
-    @media (max-width: 480px) {
-        ${FooterContainer} {
-            padding: 0.8em;
-        }
-
-        ${LinkFooter} {
-            font-size: 0.8em;
-        }
-
-        ${StoreIcons} {
-            gap: 0.3em;
-        }
-
-        ${IconeStore} {
-            height: 1.2em;
-        }
     }
 `;

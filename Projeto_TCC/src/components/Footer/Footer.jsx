@@ -1,13 +1,13 @@
 import React from "react";
 import playstore from "./playstore.png";
 import apple from "./appstore.png";
-import { 
-    FooterContainer, 
-    LinksFooter, 
-    LinkFooter, 
-    StoreIcons, 
-    IconeStore, 
-    Copyright 
+import {
+    FooterContainer,
+    LinksFooter,
+    LinkFooter,
+    StoreIcons,
+    IconeStore,
+    Copyright
 } from "./FooterStyles";
 
 export default function Footer() {

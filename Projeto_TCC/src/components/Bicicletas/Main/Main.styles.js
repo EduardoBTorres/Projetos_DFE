@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const MainContainer = styled.main`
   max-width: 1600px;
   margin: 0 auto;
-  padding: 1.5em;
+  padding: 10em;
 `;
 
 export const GridContainer = styled.div`
