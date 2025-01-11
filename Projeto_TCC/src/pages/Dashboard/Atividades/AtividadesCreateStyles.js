@@ -1,72 +1,42 @@
 import styled from 'styled-components';
 
-export const Header = styled.header`
+export const Content = styled.section`
+  font-family: 'Poppins', sans-serif;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #000;
-  padding: 1em;
+  background-color: #121212;
+  margin-top: 10em;
+  width: 100%;
+  height: 100%;
+  padding: 0 2em;
 `;
 
-export const Logo = styled.img`
-  height: 6.25em;
-`;
-
-export const Nav = styled.nav`
+export const ImageContainer = styled.div`
+  width: 50%;
   display: flex;
   align-items: center;
-`;
-
-export const NavList = styled.ul`
-  display: flex;
-  list-style: none;
-  margin-right: 2em;
-`;
-
-export const NavItem = styled.li`
-  margin: 0 1em;
-`;
-
-export const NavLink = styled.a`
-  color: #fff;
-  text-decoration: none;
-  font-weight: bold;
-  &:hover {
-    text-decoration: underline;
-  }
-`;
-
-export const LogoutButton = styled.input`
-  background-color: #b2ff59;
-  color: #000;
-  padding: 0.5em 1em;
-  border: none;
-  border-radius: 0.5em;
-  cursor: pointer;
-  &:hover {
-    background-color: #9dff57;
-  }
-`;
-
-export const UserInfo = styled.span`
-  color: #fff;
-  margin-left: 1em;
-`;
-
-export const Content = styled.section`
-  display: flex;
   justify-content: center;
-  padding: 2em;
-  background-color: #121212;
+
+  img {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 1em;
+  }
 `;
 
 export const FormContainer = styled.div`
-  background-color: #1e1e1e;
   padding: 2em;
   border: 0.2em solid #b2ff59;
   border-radius: 1em;
-  box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.5);
+  width: 40%;
+  margin: 0 auto;
+  background-color: #1f1f1f;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
+
 
 export const Title = styled.h3`
   color: #b2ff59;
@@ -77,6 +47,7 @@ export const Title = styled.h3`
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
+  width: 80%;
 `;
 
 export const Label = styled.label`
@@ -99,6 +70,7 @@ export const Select = styled.select`
   border-radius: 0.5em;
   background-color: #333;
   color: #fff;
+  margin-bottom: 1.5em;
 `;
 
 export const Option = styled.option`
@@ -109,7 +81,7 @@ export const Option = styled.option`
 export const SubmitButton = styled.button`
   background-color: #b2ff59;
   color: #000;
-  padding: 0.8em 1.5em;
+  padding: 0.8em;
   border: none;
   border-radius: 0.5em;
   cursor: pointer;

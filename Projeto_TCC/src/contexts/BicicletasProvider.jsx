@@ -13,21 +13,16 @@ export const BicicletasContext = createContext({
 const BicicletasProvider = ({ children }) => {
   const [data, setData] = useState(null);
 
-  const loadBicicletas = async (id = null) => {
-    const url = id ? `/bicicletas/${id}` : `/bicicletas`;
+  const loadBicicletas = async () => {
     try {
-      const { data } = await axiosClient.get(url);
-      const _data = data?.data;
-      console.log({ _data });
-
-      if (!_data) throw new Error("Erro ao carregar bicicletas");
-
-      Array.isArray(_data) && _data.reverse();
-      setData(_data);
+      const { data } = await axiosClient.get('/bicicletas'); // Faça a requisição para a API
+      setData(data.data); // Salve os dados no estado
+      console.log('Dados carregados', data.data); // Veja o que está sendo retornado no console
     } catch (error) {
-      console.log(error);
+      console.log('Erro ao carregar bicicletas:', error); // Verifique o erro se algo der errado
     }
   };
+  
 
   const addBicicleta = async (formDataBicicleta = null) => {
     try {

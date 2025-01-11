@@ -11,6 +11,8 @@ import Home from "../pages/Home/Home.jsx";
 import AtividadesIndex from "../pages/Dashboard/Atividades/AtividadesIndex.jsx";
 import ProtectedRoute from "../components/ProtectedRoute/ProtectedRoute.jsx";
 import EditUser from "../pages/Dashboard/Users/EditUser.jsx";
+import AtividadesCreate from "../pages/Dashboard/Atividades/AtividadesCreate.jsx";
+import EditAtividades from "../pages/Dashboard/Atividades/EditAtividades.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -49,6 +51,22 @@ const router = createBrowserRouter(
         element={
           <ProtectedRoute>
             <EditUser />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/cadastro-atividades"
+        element={
+          <ProtectedRoute>
+            <AtividadesCreate />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/editar-atividade/:id"
+        element={
+          <ProtectedRoute>
+            <EditAtividades />
           </ProtectedRoute>
         }
       />

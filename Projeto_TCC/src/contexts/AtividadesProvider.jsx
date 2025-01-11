@@ -32,7 +32,7 @@ const AtividadesProvider = ({ children }) => {
   const addAtividade = async (formDataAtividade = null) => {
     try {
       if (!formDataAtividade) throw Error("Atividade não informada");
-      formDataAtividade['fornecedor_id'] = 1;
+      formDataAtividade['user.id'] = 1;
       console.log(`Cadastrar nova atividade:`, formDataAtividade);
 
       const { data } = await axiosClient.post(`/atividades/`, formDataAtividade, {

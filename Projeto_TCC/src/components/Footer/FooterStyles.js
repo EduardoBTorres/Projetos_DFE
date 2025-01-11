@@ -2,11 +2,12 @@ import styled from "styled-components";
 
 export const FooterContainer = styled.footer`
     background-color: #1f2914;
+    font-family: poppins, sans-serif;
     color: #fff;
     padding: 1.25em;
     text-align: center;
     width: 100%;
-    position: fixed; /* Mantém o rodapé fixo */
+    position: relative;
     bottom: 0; /* Alinha no final */
     left: 0;
 `;

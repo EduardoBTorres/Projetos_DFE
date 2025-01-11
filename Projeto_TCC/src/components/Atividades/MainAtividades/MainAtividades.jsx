@@ -8,26 +8,44 @@ import {
   Container,
   Titulo,
   TextoPrincipal,
-  ImagemSobrepostaContainer,
-  ImagemSobreposta,
-  TextoSobreposto,
   AtividadesSection,
   SectionTitle,
   GridContainer,
   GridItem,
-  BtnEditar,
   RegistrarAtividadeSection,
   RegistrarText,
   BtnCadastrar,
 } from "./MainAtividades.styles";
+import { Link } from 'react-router-dom';
 
 import ciclista from "../../Atividades/ciclista.jpg";
 import ciclista1 from "../../Atividades/fundo_login.jpg";
 
 export default function MainAtividades({ atividades }) {
+  const handleDelete = async (atividadeId) => {
+    const confirmDelete = window.confirm("Tem certeza que deseja deletar esta atividade?");
+    if (confirmDelete) {
+      try {
+        const response = await axios.delete(`http://localhost:8000/api/atividades/${atividadeId}`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`, // Certifique-se de usar o token correto
+          },
+        });
+        if (response.status === 200) {
+          alert("Atividade deletada com sucesso!");
+          // Atualize a lista de atividades aqui se necessário
+        } else {
+          alert("Falha ao deletar atividade.");
+        }
+      } catch (error) {
+        console.error("Erro ao deletar atividade:", error);
+        alert("Erro ao deletar atividade. Tente novamente.");
+      }
+    }
+  };
   return (
     <>
-      <GlobalStyle /> {/* Reset de estilos globais */}
+      <GlobalStyle />
       <BannerContainer>
         <Banner src={ciclista1} alt="Banner" />
         <BannerText>
@@ -43,44 +61,42 @@ export default function MainAtividades({ atividades }) {
               O BikeTracker é um aplicativo de gerenciamento e registro de
               atividades de ciclismo. Com ele, é possível monitorar e registrar
               desde uma simples pedalada diária até atividades profissionais de
-              alta performance. Acompanhe seu desempenho, descubra novas rotas
-              e compartilhe suas conquistas com amigos e a comunidade.
+              alta performance. Acompanhe seu desempenho, descubra novas rotas e
+              compartilhe suas conquistas com amigos e a comunidade.
             </TextoPrincipal>
           </Container>
         </IntroSection>
-
-        <ImagemSobrepostaContainer>
-          <ImagemSobreposta src={ciclista} alt="Imagem de Ciclismo" />
-          <TextoSobreposto>
-            Explore o Mundo Sobre Duas Rodas! Desfrute de momentos únicos e viva
-            experiências incríveis com sua bike.
-          </TextoSobreposto>
-        </ImagemSobrepostaContainer>
-
         <AtividadesSection>
           <Container>
             <SectionTitle>Minhas Atividades</SectionTitle>
             <GridContainer>
-              {atividades.map((atividade, index) => (
-                <GridItem key={index}>
-                  <p>Título: {atividade.titulo}</p>
-                  <p>Distância: {atividade.distancia} km</p>
-                  <p>Data: {atividade.data}</p>
-                  <p>Descrição: {atividade.descricao}</p>
-                </GridItem>
-              ))}
+              {Array.isArray(atividades) && atividades.length > 0 ? (
+                atividades.map((atividade) => (
+                  <GridItem key={atividade.id}>
+                    <p><strong>Título:</strong> {atividade.titulo}</p>
+                    <p><strong>Distância:</strong> {atividade.distancia}</p>
+                    <p><strong>Data:</strong> {atividade.data}</p>
+                    <p><strong>Descrição:</strong> {atividade.descricao}</p>
+                    {/* Botão de edição */}
+                    <Link to={`/editar-atividade/${atividade.id}`}>
+                      <BtnCadastrar>Editar</BtnCadastrar>
+                    </Link>
+                    <BtnCadastrar onClick={() => handleDelete(atividade.id)}>Deletar</BtnCadastrar> 
+                  </GridItem>
+                ))
+              ) : (
+                <p>Nenhuma atividade encontrada</p>
+              )}
             </GridContainer>
-            <BtnEditar href="editarAtividade.php">Editar Atividades</BtnEditar>
           </Container>
         </AtividadesSection>
-
         <RegistrarAtividadeSection>
           <Container>
             <RegistrarText>
               Pronto para adicionar sua próxima aventura? Cadastre uma nova
               atividade agora mesmo e comece a monitorar seu desempenho.
             </RegistrarText>
-            <a href="cadastroBicicleta.php">
+            <a href="/cadastro-atividades">
               <BtnCadastrar>Cadastrar Atividade</BtnCadastrar>
             </a>
           </Container>
