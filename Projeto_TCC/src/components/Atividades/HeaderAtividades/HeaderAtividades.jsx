@@ -8,7 +8,7 @@ import {
   BotaoSair,
   UserInfo,
 } from "./HeaderAtividades.styles";
-import logo from "../../Bicicletas/Header/novologo.png";
+import logo from "../../../../public/img/novologo.png";
 import { useAuthContext } from "../../../contexts/AuthProvider";
 import { useNavigate } from "react-router-dom";
 

@@ -1,18 +1,14 @@
-import React, { useEffect, useContext } from "react";
+import React from "react";
 import {
   MainContainer,
   GridContainer,
   GridItem,
   EditButton,
 } from "./Main.styles.js";
-import { BicicletasContext } from "../../../contexts/BicicletasProvider.jsx";
 
-export default function Main() {
-  const { data: bicicletas, loadBicicletas } = useContext(BicicletasContext);
-
-  useEffect(() => {
-    loadBicicletas();
-  }, []);
+export default function Main({ bicicletas, loading, error }) {
+  if (loading) return <p>Carregando bicicletas...</p>;
+  if (error) return <p>{error}</p>;
 
   return (
     <MainContainer>
@@ -24,6 +20,7 @@ export default function Main() {
               <p>Marca: {bicicleta.marca}</p>
               <p>Modelo: {bicicleta.modelo}</p>
               <p>Aro: {bicicleta.aro}</p>
+              <p>Cor: {bicicleta.cor}</p>
             </GridItem>
           ))
         ) : (
@@ -31,7 +28,7 @@ export default function Main() {
         )}
       </GridContainer>
       <div>
-        <a href="editarBicicleta.php">
+        <a href="/editar-bicicleta">
           <EditButton>Editar Bicicletas</EditButton>
         </a>
       </div>

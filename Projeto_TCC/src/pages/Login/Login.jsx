@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../contexts/AuthProvider";
 import axiosClient from "../../utils/axios_client";
-import logo from "../../components/Bicicletas/Header/novologo.png";
+import logo from "../../../public/img/novologo.png";
 import {
   ImagemFundo,
   Container,

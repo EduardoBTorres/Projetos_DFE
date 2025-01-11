@@ -13,6 +13,7 @@ import ProtectedRoute from "../components/ProtectedRoute/ProtectedRoute.jsx";
 import EditUser from "../pages/Dashboard/Users/EditUser.jsx";
 import AtividadesCreate from "../pages/Dashboard/Atividades/AtividadesCreate.jsx";
 import EditAtividades from "../pages/Dashboard/Atividades/EditAtividades.jsx";
+import EditBicicletas from '../pages/Dashboard/Bicicletas/EditBicicletas.jsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -67,6 +68,14 @@ const router = createBrowserRouter(
         element={
           <ProtectedRoute>
             <EditAtividades />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/editar-bicicleta"
+        element={
+          <ProtectedRoute>
+            <EditBicicletas />
           </ProtectedRoute>
         }
       />

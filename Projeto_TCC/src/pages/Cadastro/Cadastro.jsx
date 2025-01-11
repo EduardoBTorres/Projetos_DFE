@@ -14,7 +14,7 @@ import {
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axiosClient from "../../utils/axios_client";
-import logo from "../../components/Bicicletas/Header/novologo.png";
+import logo from "../../../public/img/novologo.png";
 
 export default function CadastroPrincipal() {
   const [disableButton, setDisableButton] = useState(true);
