@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useAuthContext } from "../../../contexts/AuthProvider";
 import axiosClient from "../../../utils/axios_client";
-import { useParams, Navigate } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import HeaderAtividades from "../../../components/Atividades/HeaderAtividades/HeaderAtividades";
 import {
   PageWrapper,
@@ -12,10 +12,8 @@ import {
   DeleteButton,
 } from '../Users/EditUserStyles';
 
-
 export default function EditAtividades() {
-  const { token } = useAuthContext();
-  const { id } = useParams(); // Capturando o ID da URL
+  const { atividade, token } = useAuthContext();
   const [formData, setFormData] = useState({
     titulo: "",
     local: "",
@@ -24,31 +22,40 @@ export default function EditAtividades() {
     data: "",
     descricao: "",
   });
+  const { id } = useParams(); // Pegue o id da URL para buscar a atividade.
 
+  // Verifique se o token ou atividade não estão definidos
   if (!token) {
     return <Navigate to="/" />;
   }
 
   useEffect(() => {
-    const fetchAtividade = async () => {
-      try {
-        const response = await axiosClient.get(`/atividades/${id}`);
-        setFormData({
-          titulo: response.data.titulo,
-          local: response.data.local,
-          distancia: response.data.distancia,
-          tempo: response.data.tempo,
-          data: response.data.data,
-          descricao: response.data.descricao,
+    // Caso a atividade não tenha sido passada no contexto, tente buscá-la pela API
+    if (!atividade) {
+      axiosClient
+        .get(`/atividades/${id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          setFormData(response.data);
+        })
+        .catch((error) => {
+          console.error("Erro ao buscar atividade:", error);
+          alert("Erro ao carregar atividade. Tente novamente.");
         });
-      } catch (error) {
-        console.error("Erro ao carregar atividade:", error);
-        alert("Erro ao carregar atividade. Tente novamente.");
-      }
-    };
-    
-    fetchAtividade();
-  }, [id]);
+    } else {
+      setFormData({
+        titulo: atividade.titulo,
+        local: atividade.local,
+        distancia: atividade.distancia,
+        tempo: atividade.tempo,
+        data: atividade.data,
+        descricao: atividade.descricao,
+      });
+    }
+  }, [id, token, atividade]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -76,6 +83,29 @@ export default function EditAtividades() {
     }
   };
 
+  const handleDelete = async () => {
+    const confirmDelete = window.confirm("Tem certeza que deseja deletar esta atividade?");
+    if (confirmDelete) {
+      try {
+        const response = await axiosClient.delete(`/atividades/${id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (response.status === 200) {
+          alert("Atividade deletada com sucesso!");
+          // Redirecionar ou atualizar a lista de atividades
+        } else {
+          alert("Falha ao deletar atividade.");
+        }
+      } catch (error) {
+        console.error("Erro ao deletar atividade:", error);
+        alert("Erro ao deletar atividade. Tente novamente.");
+      }
+    }
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -87,7 +117,7 @@ export default function EditAtividades() {
       <PageWrapper>
         <MainContainer>
           <FormSection>
-            <Title>Editar Atividades</Title>
+            <Title>Editar Atividade</Title>
             <Form onSubmit={handleSubmit}>
               <p>
                 <label htmlFor="titulo">Título:</label>
@@ -106,7 +136,7 @@ export default function EditAtividades() {
                   type="text"
                   name="local"
                   id="local"
-                  value={formData.local}
+                  value={formData.endereco}
                   onChange={handleChange}
                   required
                 />
@@ -162,17 +192,9 @@ export default function EditAtividades() {
 
           <FormSection>
             <Title>Excluir Atividade</Title>
-            <Form
-              action={`http://localhost:8000/api/atividades/${id}`}
-              method="delete"
-              onSubmit={() =>
-                window.confirm("Tem certeza que deseja excluir esta atividade?")
-              }
-            >
-              <DeleteButton type="submit" name="delete">
-                Deletar Atividade
-              </DeleteButton>
-            </Form>
+            <button type="button" onClick={handleDelete}>
+              Deletar Atividade
+            </button>
           </FormSection>
         </MainContainer>
       </PageWrapper>

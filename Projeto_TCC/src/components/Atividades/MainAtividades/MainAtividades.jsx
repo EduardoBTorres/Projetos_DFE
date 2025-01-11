@@ -17,23 +17,26 @@ import {
   BtnCadastrar,
 } from "./MainAtividades.styles";
 import { Link } from 'react-router-dom';
+import axiosClient from "../../../utils/axios_client"; // Adicionando axiosClient para fazer a requisição de deletar
 
 import ciclista from "../../Atividades/ciclista.jpg";
 import ciclista1 from "../../Atividades/fundo_login.jpg";
 
-export default function MainAtividades({ atividades }) {
-  const handleDelete = async (atividadeId) => {
+export default function MainAtividades({ atividades, token }) {
+  const handleDelete = async (id) => {  // Recebendo o id da atividade
     const confirmDelete = window.confirm("Tem certeza que deseja deletar esta atividade?");
     if (confirmDelete) {
       try {
-        const response = await axios.delete(`http://localhost:8000/api/atividades/${atividadeId}`, {
+        const response = await axiosClient.delete(`/atividades/${id}`, {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`, // Certifique-se de usar o token correto
+            Authorization: `Bearer ${token}`,
           },
         });
+
         if (response.status === 200) {
           alert("Atividade deletada com sucesso!");
-          // Atualize a lista de atividades aqui se necessário
+          // Aqui você pode também atualizar a lista de atividades após a exclusão, se necessário
+          window.location.reload(); // Recarrega a página para refletir as alterações
         } else {
           alert("Falha ao deletar atividade.");
         }
@@ -43,6 +46,7 @@ export default function MainAtividades({ atividades }) {
       }
     }
   };
+
   return (
     <>
       <GlobalStyle />
@@ -74,6 +78,8 @@ export default function MainAtividades({ atividades }) {
                 atividades.map((atividade) => (
                   <GridItem key={atividade.id}>
                     <p><strong>Título:</strong> {atividade.titulo}</p>
+                    <p><strong>Local:</strong> {atividade.endereco}</p>
+                    <p><strong>Tempo:</strong> {atividade.tempo}</p>
                     <p><strong>Distância:</strong> {atividade.distancia}</p>
                     <p><strong>Data:</strong> {atividade.data}</p>
                     <p><strong>Descrição:</strong> {atividade.descricao}</p>
@@ -81,6 +87,7 @@ export default function MainAtividades({ atividades }) {
                     <Link to={`/editar-atividade/${atividade.id}`}>
                       <BtnCadastrar>Editar</BtnCadastrar>
                     </Link>
+                    {/* Botão de deletar */}
                     <BtnCadastrar onClick={() => handleDelete(atividade.id)}>Deletar</BtnCadastrar> 
                   </GridItem>
                 ))
