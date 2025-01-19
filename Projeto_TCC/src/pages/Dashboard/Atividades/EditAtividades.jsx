@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useAuthContext } from "../../../contexts/AuthProvider";
-import axiosClient from "../../../utils/axios_client";
+import { useAtividadesProvider } from "../../../contexts/AtividadesProvider";
 import { Navigate, useParams } from "react-router-dom";
 import HeaderAtividades from "../../../components/Atividades/HeaderAtividades/HeaderAtividades";
 import {
@@ -10,13 +10,15 @@ import {
   Title,
   Form,
   DeleteButton,
-} from '../Users/EditUserStyles';
+} from "../Users/EditUserStyles";
 
 export default function EditAtividades() {
-  const { atividade, token } = useAuthContext();
+  const { token } = useAuthContext();
+  const { loadAtividades, editAtividade, data, loading } =
+    useAtividadesProvider();
   const [formData, setFormData] = useState({
     titulo: "",
-    local: "",
+    endereco: "",
     distancia: "",
     tempo: "",
     data: "",
@@ -24,55 +26,35 @@ export default function EditAtividades() {
   });
   const { id } = useParams(); // Pegue o id da URL para buscar a atividade.
 
-  // Verifique se o token ou atividade não estão definidos
   if (!token) {
     return <Navigate to="/" />;
   }
 
+  // Carregar a atividade do contexto
   useEffect(() => {
-    // Caso a atividade não tenha sido passada no contexto, tente buscá-la pela API
-    if (!atividade) {
-      axiosClient
-        .get(`/atividades/${id}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((response) => {
-          setFormData(response.data);
-        })
-        .catch((error) => {
-          console.error("Erro ao buscar atividade:", error);
-          alert("Erro ao carregar atividade. Tente novamente.");
-        });
-    } else {
+    if (id) {
+      loadAtividades(id);
+    }
+  }, [id]);
+
+  useEffect(() => {
+    if (data) {
       setFormData({
-        titulo: atividade.titulo,
-        local: atividade.local,
-        distancia: atividade.distancia,
-        tempo: atividade.tempo,
-        data: atividade.data,
-        descricao: atividade.descricao,
+        titulo: data.titulo || "",
+        endereco: data.endereco || "",
+        distancia: data.distancia || "",
+        tempo: data.tempo || "",
+        data: data.data || "",
+        descricao: data.descricao || "",
       });
     }
-  }, [id, token, atividade]);
+  }, [data]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
-      const response = await axiosClient.put(
-        `/atividades/${id}`,
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      if (response.status === 200) {
+      const response = await editAtividade(id, formData, token); // Passe o token como argumento.
+      if (response === "Atividade atualizada com sucesso!") {
         alert("Atividade atualizada com sucesso!");
       } else {
         alert("Falha ao atualizar atividade.");
@@ -82,18 +64,18 @@ export default function EditAtividades() {
       alert("Erro ao atualizar atividade. Tente novamente.");
     }
   };
+  
+  
+  
 
   const handleDelete = async () => {
-    const confirmDelete = window.confirm("Tem certeza que deseja deletar esta atividade?");
+    const confirmDelete = window.confirm(
+      "Tem certeza que deseja deletar esta atividade?"
+    );
     if (confirmDelete) {
       try {
-        const response = await axiosClient.delete(`/atividades/${id}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        if (response.status === 200) {
+        const response = await deleteAtividade(id);
+        if (response === "Atividade deletada com sucesso!") {
           alert("Atividade deletada com sucesso!");
           // Redirecionar ou atualizar a lista de atividades
         } else {
@@ -110,6 +92,8 @@ export default function EditAtividades() {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
+
+  if (loading) return <p>Carregando...</p>;
 
   return (
     <>
@@ -131,16 +115,17 @@ export default function EditAtividades() {
                 />
               </p>
               <p>
-                <label htmlFor="local">Local:</label>
+                <label htmlFor="endereco">Local:</label>
                 <input
                   type="text"
-                  name="local"
-                  id="local"
+                  name="endereco" // Corrigido de "local" para "endereco"
+                  id="endereco"
                   value={formData.endereco}
                   onChange={handleChange}
                   required
                 />
               </p>
+
               <p>
                 <label htmlFor="distancia">Distância:</label>
                 <input

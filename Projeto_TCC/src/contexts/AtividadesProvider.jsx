@@ -1,7 +1,10 @@
-import { createContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import axiosClient from "../utils/axios_client";
+import axios from "axios";
+import { useAuthContext } from "../contexts/AuthProvider";
 
-export const AtividadesContext = createContext({
+
+export const AtividadesProvider = createContext({
   data: null,
   loadAtividades: () => {},
   setData: () => {},
@@ -10,90 +13,79 @@ export const AtividadesContext = createContext({
   addAtividade: () => {},
 });
 
-const AtividadesProvider = ({ children }) => {
+export const useAtividadesProvider = () => useContext(AtividadesProvider);
+
+const AtividadesProviderComponent = ({ children }) => {
   const [data, setData] = useState(null);
 
-  const loadAtividades = async (id = null) => {
-    const url = id ? `/atividades/${id}` : `/atividades`;
+  const [loading, setLoading] = useState(false);
+
+  const loadAtividades = async (id) => {
+    setLoading(true);
     try {
-      const { data } = await axiosClient.get(url);
-      const _data = data?.data;
-      console.log({ _data });
-
-      if (!_data) throw new Error("Erro ao carregar atividades");
-
-      Array.isArray(_data) && _data.reverse();
-      setData(_data);
+      const response = await axiosClient.get(`/atividades/${id}`);
+      setData(response.data);
     } catch (error) {
-      console.log(error);
+      console.error("Erro ao carregar atividade:", error);
+    } finally {
+      setLoading(false);
     }
   };
-
-  const addAtividade = async (formDataAtividade = null) => {
+  
+  
+  const addAtividade = async (formDataAtividade) => {
     try {
-      if (!formDataAtividade) throw Error("Atividade não informada");
-      formDataAtividade['user.id'] = 1;
-      console.log(`Cadastrar nova atividade:`, formDataAtividade);
+      if (!formDataAtividade) throw new Error("Atividade não informada");
+      formDataAtividade["user.id"] = 1;
 
-      const { data } = await axiosClient.post(`/atividades/`, formDataAtividade, {
+      const { data } = await axiosClient.post("/atividades", formDataAtividade, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
 
-      if (!data) throw new Error("Erro ao atualizar atividade");
-      const _data = data?.data;
+      if (!data) throw new Error("Erro ao cadastrar atividade");
       const { message } = data;
-      console.log({ _data, message });
       loadAtividades();
       return message;
     } catch (error) {
       console.error(error);
-      return error?.response?.data?.message || "Erro ao atualizar atividade";
+      return error?.response?.data?.message || "Erro ao cadastrar atividade";
     }
   };
 
-  const editAtividade = async (id, formDataAtividade = null) => {
+  const editAtividade = async (id, atividade, token) => {
     try {
-      if (!formDataAtividade) throw Error("Atividade não informada");
-
-      console.log(`Atualizar Atividade id: ${id}`, { formDataAtividade });
-
-      formDataAtividade.append("_method", "put");
-
-      const { data } = await axiosClient.post(
-        `/atividades/${id}`,
-        formDataAtividade,
+      const response = await axios.put(
+        `http://localhost:8000/api/atividades/${id}`,
+        atividade,
         {
           headers: {
-            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${token}`, // Adicione o token no cabeçalho.
+            "Content-Type": "application/json",
           },
         }
       );
+      return response.data.message; // Retorna a mensagem de sucesso ou erro.
+    } catch (error) {
+      console.error("Erro ao editar atividade:", error);
+      throw error;
+    }
+  };
+  
 
-      if (!data) throw new Error("Erro ao atualizar atividade");
-      const _data = data?.data;
-      const { message } = data;
-      console.log({ _data, message });
+  const deleteAtividade = async (id) => {
+    try {
+      const { data } = await axiosClient.delete(`/atividades/${id}`);
       loadAtividades();
-      return message;
+      return data.message;
     } catch (error) {
       console.error(error);
-      return error?.response?.data?.message || "Erro ao atualizar atividade";
     }
   };
 
-  const deleteAtividade = async (id) => {
-    alert(`Remove Atividade id: ${id}`);
-    const { data } = await axiosClient.delete(`/atividades/${id}`);
-    const { message } = data;
-    console.log({ message });
-    loadAtividades();
-    return message;
-  };
-
   return (
-    <AtividadesContext.Provider
+    <AtividadesProvider.Provider
       value={{
         data,
         loadAtividades,
@@ -104,8 +96,8 @@ const AtividadesProvider = ({ children }) => {
       }}
     >
       {children}
-    </AtividadesContext.Provider>
+    </AtividadesProvider.Provider>
   );
 };
 
-export default AtividadesProvider;
+export default AtividadesProviderComponent;
