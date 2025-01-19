@@ -16,11 +16,12 @@ import {
 import Imagem from "../../../../public/img/cadAtividades.jpg";
 import HeaderAtividades from "../../../components/Atividades/HeaderAtividades/HeaderAtividades";
 import Footer from "../../../components/Footer/Footer";
+import axiosClient from "../../../utils/axios_client";
 
 export default function AtividadesCreate() {
   const [formData, setFormData] = useState({
     titulo: "",
-    local: "",
+    endereco: "",
     distancia: "",
     tempo: "",
     data: "",
@@ -41,25 +42,29 @@ export default function AtividadesCreate() {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         });
-
-        if (Array.isArray(response.data)) {
-          setBicicletas(response.data);
+  
+        // Agora verificamos se response.data.data é um array
+        if (Array.isArray(response.data.data)) {
+          setBicicletas(response.data.data); // Atualiza o estado com as bicicletas
         } else {
-          console.error("Erro ao carregar bicicletas", response.data);
+          console.error("Erro: Resposta da API não contém um array de bicicletas.", response.data);
         }
       } catch (error) {
         console.error("Erro ao carregar bicicletas", error);
       }
     };
+  
     fetchBicicletas();
   }, []);
+  
 
   useEffect(() => {
-    const { titulo, local, distancia, tempo, data, descricao, codBicicleta } = formData;
+    const { titulo, endereco, distancia, tempo, data, descricao, codBicicleta } = formData;
     setDisableButton(
-      !(titulo && local && distancia > 0 && tempo > 0 && data && descricao && codBicicleta)
+      !(titulo && endereco && distancia > 0 && tempo > 0 && data && descricao && codBicicleta)
     );
   }, [formData]);
+  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -71,14 +76,16 @@ export default function AtividadesCreate() {
 
   const onSubmit = async (event) => {
     event.preventDefault();
+    setMessage(null); // Limpa mensagens anteriores
     try {
-      const message = await addAtividade(formData);
-      setMessage(message);
-      setTimeout(() => navigate("/atividades"), 3000);
+      const feedback = await addAtividade(formData); // Chama o método do Provider
+      setMessage(feedback);
+      setTimeout(() => navigate("/atividades"), 3000); // Redireciona após sucesso
     } catch (error) {
-      setMessage("Erro ao cadastrar atividade. Tente novamente.");
+      setMessage(error.message || "Erro ao cadastrar atividade. Tente novamente.");
     }
   };
+  
 
   return (
     <>
@@ -102,9 +109,9 @@ export default function AtividadesCreate() {
             <Label htmlFor="local">Local:</Label>
             <Input
               type="text"
-              id="local"
-              name="local"
-              value={formData.local}
+              id="endereco"
+              name="endereco"
+              value={formData.endereco}
               onChange={handleChange}
             />
 

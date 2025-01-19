@@ -1,8 +1,6 @@
 import { createContext, useContext, useState } from "react";
 import axiosClient from "../utils/axios_client";
 import axios from "axios";
-import { useAuthContext } from "../contexts/AuthProvider";
-
 
 export const AtividadesProvider = createContext({
   data: null,
@@ -32,25 +30,21 @@ const AtividadesProviderComponent = ({ children }) => {
     }
   };
   
-  
   const addAtividade = async (formDataAtividade) => {
     try {
-      if (!formDataAtividade) throw new Error("Atividade não informada");
-      formDataAtividade["user.id"] = 1;
-
-      const { data } = await axiosClient.post("/atividades", formDataAtividade, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-
-      if (!data) throw new Error("Erro ao cadastrar atividade");
-      const { message } = data;
-      loadAtividades();
-      return message;
+      if (!formDataAtividade) throw new Error("Dados da atividade não foram fornecidos.");
+  
+      // Envia o formulário ao backend
+      const response = await axiosClient.post("/atividades", formDataAtividade);
+  
+      const { message } = response.data;
+  
+      // Atualiza a lista de atividades
+      await loadAtividades();
+      return message || "Atividade cadastrada com sucesso!";
     } catch (error) {
-      console.error(error);
-      return error?.response?.data?.message || "Erro ao cadastrar atividade";
+      console.error("Erro ao cadastrar atividade:", error);
+      throw new Error(error?.response?.data?.message || "Erro ao cadastrar atividade.");
     }
   };
 
@@ -61,7 +55,7 @@ const AtividadesProviderComponent = ({ children }) => {
         atividade,
         {
           headers: {
-            Authorization: `Bearer ${token}`, // Adicione o token no cabeçalho.
+            Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
           },
         }
@@ -73,7 +67,6 @@ const AtividadesProviderComponent = ({ children }) => {
     }
   };
   
-
   const deleteAtividade = async (id) => {
     try {
       const { data } = await axiosClient.delete(`/atividades/${id}`);

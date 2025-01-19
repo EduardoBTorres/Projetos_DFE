@@ -26,10 +26,10 @@ axiosClient.interceptors.response.use(
       localStorage.removeItem("CURRENT_USER");
 
       // Redireciona para a página de login (pode ser via navegação ou alteração da URL)
-      window.location.href = "/"; // Ou use o React Router para redirecionar: navigate("/")
+      window.location.href = "/"; // Ou use outro mecanismo de navegação de sua escolha
     }
 
-    // Caso o erro não seja de autenticação, continua propagando o erro
+    // Caso contrário, retorna o erro
     return Promise.reject(error);
   }
 );
